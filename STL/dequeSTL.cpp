@@ -10,7 +10,7 @@ void printKMax(int arr[], int n, int k)
     
     while(k<=n)
     {
-        for(j=i; i<k; i++)
+        for(j=i; j<k; j++)
         {
             v.push_back(arr[i]);
         }

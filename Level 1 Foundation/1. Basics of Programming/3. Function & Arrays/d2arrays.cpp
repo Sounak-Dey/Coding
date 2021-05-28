@@ -1,23 +1,52 @@
 #include <bits/stdc++.h>
 using namespace std;
 
- int dif(int *a1, int n1, int *a2, int n2)
+void dif(int *a1, int n1, int *a2, int n2)
 {
-    int a=0,b=0,p=0;
-    for(int  i= n1-1; i>=0; i--)
-    {
-        a += a1[i]*pow(10,p++); 
-    }
-   // cout<<a<<endl;
-    p=0;
-    
-    for(int j= n2-1; j>=0; j--)
-    {
-        b += a2[j]*pow(10,p++); 
-    }
-   // cout<<b<<endl;
 
-    return(b-a);
+    int i = n1-1, j = n2-1, bw = 0 ;
+    int *d = new int[n2];
+
+    int n = n2-1;
+
+    while(n>=0)
+    {
+        int a1v = (i>=0)?a1[i]:0;
+
+        if(a2[j]-bw>=a1v)
+        {
+            d[n] = a2[j] - bw - a1v;
+            bw = 0;
+        }
+        else
+        {
+            d[n] = a2[j] + 10 - bw - a1v;
+            bw = 1;
+        }
+
+        n--;
+        i--;
+        j--;
+    }
+
+    i=0;
+    
+    while(i<n2)
+    {
+        if(d[i] == 0)
+            i++;
+        else    
+            break;
+    }
+
+        
+    for(;i<n2;i++)
+    {
+        cout<<d[i]<<endl;
+    }
+
+
+    delete[] d;
 }
 
 int main(){
@@ -34,33 +63,10 @@ int main(){
         cin>>a2[i];
     }
 
-    int s = dif(a1, n1,a2,n2);
-   // int m=n2 ;
-   int d=s;
-    int n=0;
-    
-
-    while(d)
-    {
-        n++;
-        d=d/10;
-    }
-    int* a = new int[n];
-    
-    int m=n+1;
-    while(s>0)
-    {
-        a[n--] = s%10;
-        s=s/10;
-    }
-    n=m;
-    for(int i=1; i<n; i++)
-    {
-        cout<<a[i]<<endl;
-    }
+    dif(a1, n1,a2,n2);
 
     delete[] a1;
     delete[] a2;
-    delete[] a;
+
     return 0;
 }
