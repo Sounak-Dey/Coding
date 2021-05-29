@@ -6,9 +6,11 @@ void rotate(int* arr, int n, int k){
    
    
    int i,j=0;
+  
    
    if(k>=0)
    {
+        k = k%n;
         int *b = new int[k];
 
         for(i=(n-k); i<n; i++)
@@ -29,6 +31,7 @@ void rotate(int* arr, int n, int k){
    else if(k<0)
    {
        k = k*(-1);
+       k = k%n;
        int *b = new int[k];
 
        for(i=0; i<k; i++)
