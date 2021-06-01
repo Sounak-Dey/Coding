@@ -31,6 +31,11 @@ int main()
         cout<<"\n";
     }
 
-    delete[] a;
+
+    for(int i=0;i<n;i++)    //To delete the inner arrays
+      delete[] a[i];   
+
+    delete[] a;             // to delete the outer array of pointers
+
     return 0;
 }
