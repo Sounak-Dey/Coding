@@ -8,6 +8,7 @@ void rotate(int* arr, int n, int k){
    int i,j=0;
   
    
+   
    if(k>=0)
    {
         k = k%n;
