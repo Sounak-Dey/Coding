@@ -14,7 +14,7 @@ int main()
         for(j=0; j<n; j++)
             cin>>a[i][j];
 
-    int p = n;
+    // int p = n;
     int diff = 0;
 
     while(diff<a.size())
