@@ -7,7 +7,7 @@ using namespace std;
 // dc - destination column
 vector <string> getMazePaths(int sr, int sc, int dr, int dc)
 {
-    vector<string> v1, v2, v3, v4, v;
+    vector<string> h, v, d, a;
 
     if(sr==dr && sc==dc)
     {
@@ -19,13 +19,27 @@ vector <string> getMazePaths(int sr, int sc, int dr, int dc)
     else if(sr > dr)
         return v;
 
-    v1 = getMazePaths(sr, sc+1, dr, dc);
-    v2 = getMazePaths(sr+1, sc, dr, dc);
 
-    for(auto x: v1)
-        v.push_back('h' + x);
-    for(auto x: v2)
-        v.push_back('v' + x);
+    for(auto js=1; js<=dc-sc; js++)
+    {
+        h = getMazePaths(sr, sc+js, dr, dc);
+        for(auto x: h)
+            v.push_back('h' + to_string(js) + x);
+    }
+    
+    for(auto js=1; js<=dr-sr; js++)
+    {
+        v = getMazePaths(sr+js, sc, dr, dc);
+        for(auto x: v)
+            v.push_back('v' + to_string(js) + x);
+    }
+    
+    for(auto js=1; (js<=dc-sc && js<=dr-sr); js++)
+    {
+        d = getMazePaths(sr+js, sc+js, dr, dc);
+        for(auto x: d)
+            v.push_back('d' + to_string(js) + x);
+    }
 
     return v;
 
