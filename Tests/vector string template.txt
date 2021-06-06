@@ -1,0 +1,8 @@
+    for(auto x: v)
+    {   
+        int sum = 0;
+        for(auto i=0; i<x.length(); i++)
+        {
+            sum = sum + x[i] - '0';
+        }
+    }
