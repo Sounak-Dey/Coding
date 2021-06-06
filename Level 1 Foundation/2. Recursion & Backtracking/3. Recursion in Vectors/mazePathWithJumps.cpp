@@ -11,37 +11,37 @@ vector <string> getMazePaths(int sr, int sc, int dr, int dc)
 
     if(sr==dr && sc==dc)
     {
-        v.push_back("");
-        return v;
+        a.push_back("");
+        return a;
     }
     else if(sc > dc)
-        return v;
+        return a;
     else if(sr > dr)
-        return v;
+        return a;
 
 
     for(auto js=1; js<=dc-sc; js++)
     {
         h = getMazePaths(sr, sc+js, dr, dc);
         for(auto x: h)
-            v.push_back('h' + to_string(js) + x);
+            a.push_back('h' + to_string(js) + x);
     }
     
     for(auto js=1; js<=dr-sr; js++)
     {
         v = getMazePaths(sr+js, sc, dr, dc);
         for(auto x: v)
-            v.push_back('v' + to_string(js) + x);
+            a.push_back('v' + to_string(js) + x);
     }
     
     for(auto js=1; (js<=dc-sc && js<=dr-sr); js++)
     {
         d = getMazePaths(sr+js, sc+js, dr, dc);
         for(auto x: d)
-            v.push_back('d' + to_string(js) + x);
+            a.push_back('d' + to_string(js) + x);
     }
 
-    return v;
+    return a;
 
 }
 
