@@ -13,10 +13,6 @@ void printPermutations(string str, string asf)
     {
         string temp = str;
         printPermutations(temp.erase(i,1), asf + str[i]);
-        
-        // another method to write
-        // string remaining = str.substr(0,i) + str.substr(i+1);
-        // printPermutations(remaining, asf + str[i]);
     }
 
 }

@@ -10,11 +10,14 @@ void printMazePaths(int sr, int sc, int dr, int dc, string psf)
     }
     else if(sr>dr || sc>dc)
         return;
+        
     
     for(auto js=1; js<=dc-sc; js++)
         printMazePaths(sr, sc+js, dr, dc, psf + 'h' + to_string(js));
+
     for(auto js=1; js<=dr-sr; js++)
         printMazePaths(sr+js, sc, dr, dc, psf + 'v' + to_string(js));
+
     for(auto js=1; js<=dc-sc && js<=dr-sr; js++)
         printMazePaths(sr+js, sc+js, dr, dc, psf + 'd' + to_string(js));
 }

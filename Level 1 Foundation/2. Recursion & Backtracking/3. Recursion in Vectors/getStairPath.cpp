@@ -17,15 +17,17 @@ vector<string> gsp(int n)
     v2 = gsp(n-2);
     v3 = gsp(n-3);
 
+
     for(auto x: v1)
         v.push_back('1' + x);
+
     for(auto x: v2)
         v.push_back('2' + x);
+
     for(auto x: v3)
         v.push_back('3' + x);
 
     return v;
-
 }
 
 

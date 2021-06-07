@@ -22,8 +22,10 @@ vector <string> getMazePaths(int sr, int sc, int dr, int dc)
     v1 = getMazePaths(sr, sc+1, dr, dc);
     v2 = getMazePaths(sr+1, sc, dr, dc);
 
+
     for(auto x: v1)
         v.push_back('h' + x);
+
     for(auto x: v2)
         v.push_back('v' + x);
 
