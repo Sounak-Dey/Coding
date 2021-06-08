@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void floodfill(vector<vector<int>> maze, int sr, int sc, string psf) 
+void floodfill(vector<vector<int>> &maze, int sr, int sc, string psf) 
 {
     if(sr<0 || sc<0 || sr == maze.size() || sc == maze[sr].size())
         return;
@@ -29,6 +29,8 @@ void floodfill(vector<vector<int>> maze, int sr, int sc, string psf)
 
     //right
     floodfill(maze, sr, sc+1, psf + 'r');
+
+    maze[sr][sc] = 0;
 }
 
 
