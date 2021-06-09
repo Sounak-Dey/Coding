@@ -22,6 +22,6 @@ int main()
     vector<int> mem(n+1, 0);
 
     cout<<fib(n, mem)<<endl;
-    
+
     return 0;
 }
