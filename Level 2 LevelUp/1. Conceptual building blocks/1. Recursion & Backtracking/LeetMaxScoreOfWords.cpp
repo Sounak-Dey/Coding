@@ -37,42 +37,25 @@ int msof(vector<string> &words, vector<int> &freq, vector<int> &score, int idx)
     return max(sumNo, sumYes);
 }
 
-int main()
+
+
+class Solution 
 {
-    int noofWords;
-    cin>>noofWords;
-
-    vector<string> words(noofWords);
-    for(auto i=0; i<words.size(); i++)
-        cin>>words[i];
-
-    int noofLetters;
-    cin>>noofLetters;
-
-    vector<char> letters(noofLetters);
-    for(auto i=0; i<letters.size(); i++)
-        cin>>letters[i];
-
-    vector<int> score(26);
-    for(auto i=0; i<score.size(); i++)
-        cin>>score[i];
-
-    // if (words == nullptr || words.size() == 0 || letters == null || letters.size() == 0 || score == null || score.size() == 0)
-    // {
-	// 	cout<<(0)<<endl;
-	// 	return;
-    // }
-    if (words.size() == 0 || letters.size() == 0 || score.size() == 0)
+public:
+    int maxScoreWords(vector<string>& words, vector<char>& letters, vector<int>& score) 
     {
-		cout<<(0);
-		return 0;
+        
+        if (words.size() == 0 || letters.size() == 0 || score.size() == 0)
+        {
+		    cout<<(0);
+		    return 0;
+        }
+        
+        vector<int> freq(26);
+        for(auto l: letters)
+            freq[l - 'a']++;
+        
+        return msof(words, freq, score, 0);
+        
     }
-
-    vector<int> freq(26);
-    for(auto l: letters)
-        freq[l - 'a']++;
-
-    cout<<msof(words, freq, score, 0);
-
-    return 0;
-}
+};

@@ -1,3 +1,6 @@
+#include<bits/stdc++.h>
+using namespace std;
+
 // optimized NQueen solution
 void opNQueen(vector<string> &board, int r, vector<bool> &col, vector<bool> &rdiag, vector<bool> &pdiag, vector<vector<string>> &ans)
 {
@@ -30,7 +33,8 @@ void opNQueen(vector<string> &board, int r, vector<bool> &col, vector<bool> &rdi
 }
 
 
-vector<vector<string> > Solution::solveNQueens(int n) {
+vector<vector<string> > Solution::solveNQueens(int n) 
+{
 
     vector<bool> col(n, false);
     vector<bool> rdiag(2*n -1, false);
