@@ -33,17 +33,23 @@ void opNQueen(vector<string> &board, int r, vector<bool> &col, vector<bool> &rdi
 }
 
 
-vector<vector<string> > Solution::solveNQueens(int n) 
+
+
+class Solution 
 {
+    public:
+        vector<vector<string>> solveNQueens(int n) 
+        {
+            vector<bool> col(n, false);
+            vector<bool> rdiag(2*n -1, false);
+            vector<bool> pdiag(2*n -1, false);
 
-    vector<bool> col(n, false);
-    vector<bool> rdiag(2*n -1, false);
-    vector<bool> pdiag(2*n -1, false);
+            vector<vector<string>> ans;
+            vector<string> board(n, string(n,'.'));
+        
+            opNQueen(board, 0, col, rdiag, pdiag, ans);
+        
+            return ans;
 
-    vector<vector<string>> ans;
-    vector<string> board(n, string(n,'.'));
-    
-    opNQueen(board, 0, col, rdiag, pdiag, ans);
-    
-    return ans;
-}
+        }
+};

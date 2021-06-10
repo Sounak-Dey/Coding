@@ -41,21 +41,21 @@ int msof(vector<string> &words, vector<int> &freq, vector<int> &score, int idx)
 
 class Solution 
 {
-public:
-    int maxScoreWords(vector<string>& words, vector<char>& letters, vector<int>& score) 
-    {
-        
-        if (words.size() == 0 || letters.size() == 0 || score.size() == 0)
+    public:
+        int maxScoreWords(vector<string>& words, vector<char>& letters, vector<int>& score) 
         {
-		    cout<<(0);
-		    return 0;
+            
+            if (words.size() == 0 || letters.size() == 0 || score.size() == 0)
+            {
+                cout<<(0);
+                return 0;
+            }
+            
+            vector<int> freq(26);
+            for(auto l: letters)
+                freq[l - 'a']++;
+            
+            return msof(words, freq, score, 0);
+            
         }
-        
-        vector<int> freq(26);
-        for(auto l: letters)
-            freq[l - 'a']++;
-        
-        return msof(words, freq, score, 0);
-        
-    }
 };
