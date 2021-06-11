@@ -3,18 +3,7 @@
 
 using namespace std;
 
-void display(vector<vector<int>> &board)
-{
-    for (int i = 0; i < 9; i++)
-    {
-        for (int j = 0; j < 9; j++)
-            cout<<board[i][j]<<" ";
-        
-        cout<<endl;
-    }      
-}
-
-bool canFill(vector<vector<int>> &board, int val, int r, int c)
+bool canFill(vector<vector<char>> &board, char val, int r, int c)
 {
     //checking in column
     for(auto col=0; col<9; col++)
@@ -40,13 +29,13 @@ bool canFill(vector<vector<int>> &board, int val, int r, int c)
 }
 
 
-void solveSudoku(vector<vector<int>> &board, int r, int c)
+void Sudoku(vector<vector<char>> &board, int r, int c,  vector<vector<char>> &sol)
 {   
     if(r == 9)
     {
-        display(board);
-        return;    
-    }
+        sol = board;
+        return;
+    }       
 // check for out of grid conditions
 
     int nr, nc;
@@ -62,32 +51,31 @@ void solveSudoku(vector<vector<int>> &board, int r, int c)
         nc = c + 1;
     }
 
-    if(board[r][c] == 0)
+    if(board[r][c] == '.')
     {
-        for(auto val=1; val<10; val++)
+        for(char ch='1';ch<='9';ch++)
         {
-            if(canFill(board, val, r, c))
+            if(canFill(board, ch, r, c))
             {
-                board[r][c] =  val;
-                solveSudoku(board, nr, nc);
-                board[r][c] = 0;
+                board[r][c] = ch;
+                Sudoku(board, nr, nc, sol);
+                board[r][c] = '.';
             }
         }
     }
     else
-        solveSudoku(board, nr, nc);   
+        Sudoku(board, nr, nc, sol);   
 }
 
 
-int main()
-{
-    vector<vector<int>> board(9, vector<int> (9));
-
-    for (int i = 0; i < 9; i++)
-      for (int j = 0; j < 9; j++)
-        cin>>board[i][j];
-
-    solveSudoku(board, 0, 0);
-
-    return 0;
-}
+class Solution {
+public:
+    void solveSudoku(vector<vector<char>>& board) {
+        
+        vector<vector<char>> sol;
+        
+        Sudoku(board, 0, 0, sol);
+        
+        board = sol;
+    }
+};
