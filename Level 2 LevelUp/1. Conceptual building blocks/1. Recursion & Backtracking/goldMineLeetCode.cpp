@@ -1,114 +1,53 @@
-#include <bits/stdc++.h>
+#include<climits>
+#include<algorithm>
+#include<vector>
 using namespace std;
 
-static int max = 0;
+vector<vector<int> >ds = {{0,1},{0,-1},{-1,0},{1,0} };
 
-
-// collects total gold value in a particular connected component
-void travelAndCollectGold(vector<vector<int>> &mine, int r, int c,  vector<vector<bool>> &visited, vector<int> &bag)
+// collects max total gold value amongst all the paths generated after starting from a particular cell
+int travelAndCollectGold(vector<vector<int>> &mine, int r, int c)
 {
-    if(r<0 || c<0 || r == mine.size() || c == mine[r].size() || mine[r][c] == 0 || visited[r][c] == true)
-        return;
-    
-    visited[r][c] = true;
-    bag.push_back(mine[r][c]);
-    int size = bag.size();
-    
+    if(mine[r][c] == 0)
+        return 0;
 
-        travelAndCollectGold(mine, r-1, c, visited, bag);
-         if(size < bag.size())
-         {
-             int sum = 0;
-            for(auto val: bag)      // summing the total gold collected int this path
-                sum += val;
-             
-             if(sum > ::max)         
-                    ::max = sum;
-             
-             int l = bag.size() - size;
-             for(auto i=0; i<l; i++)
-                bag.pop_back();
-          }
+    int gold = mine[r][c];
+    int maxProfit = gold;
+    mine[r][c] = 0;
 
-    
-  
-        travelAndCollectGold(mine, r, c+1, visited, bag);
-         if(size < bag.size())
-         {
-             int sum = 0;
-            for(auto val: bag)      // summing the total gold collected int this path
-                sum += val;
-             
-             if(sum > ::max)         
-                    ::max = sum;
-             
-             int l = bag.size() - size;
-             for(auto i=0; i<l; i++)
-                bag.pop_back();
-          }
+    for(int i=0;i<ds.size();i++)
+    {
+        int newX = r + ds[i][0];
+        int newY = c + ds[i][1];
+        int profit = 0;
 
-    
-
-        travelAndCollectGold(mine, r, c-1, visited, bag);
-         if(size < bag.size())
-         {
-             int sum = 0;
-            for(auto val: bag)      // summing the total gold collected int this path
-                sum += val;
-             
-             if(sum > ::max)         
-                    ::max = sum;
-             
-             int l = bag.size() - size;
-             for(auto i=0; i<l; i++)
-                bag.pop_back();
-          }
-    
-
-        travelAndCollectGold(mine, r+1, c, visited, bag);
-         if(size < bag.size())
-         {
-             int sum = 0;
-            for(auto val: bag)      // summing the total gold collected int this path
-                sum += val;
-             
-             if(sum > ::max)         
-                    ::max = sum;
-             
-             int l = bag.size() - size;
-             for(auto i=0; i<l; i++)
-                bag.pop_back();
-          }
-    
-    visited[r][c] = false;
-
-}
-
-
-// getting the max gold value amongst all connected components
-void getMaxGold(vector<vector<int>> &mine)
-{
-    vector<vector<bool>> visited(mine.size(), vector<bool> (mine[0].size()));
-
-    // starting from all possible boxes in the array
-    for(auto i=0; i<mine.size(); i++)
-        for(auto j=0; j<mine[i].size(); j++)
+        if(newX >= 0 && newX < mine.size() && newY >=0 && newY<mine[0].size() && mine[newX][newY] != 0)
         {
-            if(mine[i][j] != 0 )   
-            {
-                vector<int> bag, pval;    // for collecting the gold data of the currently chosen path
-                travelAndCollectGold(mine, i, j, visited, bag);
-            }   
+            profit = travelAndCollectGold(mine, newX, newY);
+
+            if(profit + gold > maxProfit)
+                maxProfit = profit+gold;
         }
+    }
+
+    mine[r][c] = gold;
+
+    return maxProfit;
+
 }
 
 
 class Solution {
 public:
-    int getMaximumGold(vector<vector<int>>& grid) {
-        
-        getMaxGold(grid);
-        
-        return ::max;
+    int getMaximumGold(vector<vector<int>>& grid) 
+    {
+        int maxProfit=INT_MIN;
+
+        // starting from all possible boxes in the array
+        for(auto i=0; i<grid.size(); i++)
+            for(auto j=0; j<grid[i].size(); j++)
+                maxProfit = max(maxProfit,travelAndCollectGold(grid,i,j));
+
+        return maxProfit;
     }
 };
