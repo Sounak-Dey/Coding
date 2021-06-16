@@ -6,7 +6,6 @@ using namespace std;
 
 void display(vector<vector<int>> &ans)
 {
-
     for(auto i=0; i<ans.size(); i++)
     {                                               
         cout<<"[";
@@ -70,7 +69,7 @@ int main()
 
     vector<int> arr(n);
     int sum = 0;
-    for(int i=0; i<n, i++)
+    for(int i=0; i<n; i++)
     {
         cin>>arr[i];
         sum += arr[i];
