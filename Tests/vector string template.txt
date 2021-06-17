@@ -21,3 +21,20 @@ void display(vector<string>& arr)
     
     cout << "]"<<endl;
 }
+
+//2D
+void display(vector<vector<int>> &ans)
+{
+    for(auto i=0; i<ans.size(); i++)
+    {                                               
+        cout<<"[";
+        for(auto j=0; j<ans[i].size(); j++)
+        {
+            cout<<ans[i][j];
+            if(j < ans[i].size()-1) 
+                cout << ", ";
+        }
+        cout<<"] ";     
+    }
+    cout<<endl; 
+}
