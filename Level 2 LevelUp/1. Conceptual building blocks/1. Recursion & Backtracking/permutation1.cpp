@@ -3,6 +3,7 @@
 
 using namespace std;
 
+// ci - current item/r
 void permutations1(vector<int> &boxes, int ci, int r)
 {
     //levels - r
