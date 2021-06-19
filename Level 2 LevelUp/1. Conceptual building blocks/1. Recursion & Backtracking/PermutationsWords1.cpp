@@ -1,3 +1,7 @@
+
+// this maintaining a frequence map removes the possibility of printing two same permutations that 
+// get generated when multiple same characters are present in the words/string
+
 #include<iostream>
 #include<string>
 #include<map>
