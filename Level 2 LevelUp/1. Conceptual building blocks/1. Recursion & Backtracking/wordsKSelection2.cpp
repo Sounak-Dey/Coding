@@ -1,32 +1,27 @@
 #include<iostream>
 #include<string>
+#include<vector>
 #include<unordered_set>
 
 using namespace std;
 
-//ssf - spots so far
-//ts - total spots
-void combination(int i, string ustr, int ssf, int ts, string asf)
+
+void combination2(int idx, string ustr, int k, string asf)
 {
-    if(i == ustr.length())
+    if(idx == ustr.length())
         return;
-    
-    if(ssf == ts)
+        
+    if(k==0)
     {
         cout<<asf<<endl;
         return;
     }
 
-    // every character gets an option to be included or not included
-    
-    //include
-    combination(i+1, ustr, ssf+1, ts, asf + ustr[i]);
-
-    //not include
-    combination(i+1, ustr, ssf, ts, asf);
+    // options = characters
+    // spots = levels
+    for(int i = idx; i<ustr.length(); i++)
+        combination2(i+1, ustr, k-1, asf + ustr[i]);
 }
-
-
 
 int main()
 {
@@ -46,6 +41,6 @@ int main()
             ustr += ch;
         }
 
-    combination(0, ustr, 0, k, "");
+    combination2(0, ustr, k, "");
     return 0;
 }
