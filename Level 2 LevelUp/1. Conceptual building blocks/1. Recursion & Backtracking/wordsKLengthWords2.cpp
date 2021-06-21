@@ -6,7 +6,7 @@ using namespace std;
 // levels - spots
 //options - characters
 // levels < options
-// so options dont have a choiec of going blank
+// so spots/levels dont have a choice of going blank
 void solution(string &ustr, int k, string asf)
 {
     
