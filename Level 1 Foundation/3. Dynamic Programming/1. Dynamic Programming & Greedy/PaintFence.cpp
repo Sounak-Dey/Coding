@@ -10,8 +10,8 @@ void solve(int n, int k)
     // diff - latest 2 fences are of different color
     // the problem has base case for i=2
 
-    int same = k * 1;
-    int diff = k * (k-1);
+    int same = k * 1;       // ways to color 1st 2 fences samely
+    int diff = k * (k-1);   // ways to color 1st 2 fences differently
     int total = same + diff;
 
     int i = 3;
