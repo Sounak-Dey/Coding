@@ -24,7 +24,7 @@ void solve(string str)
         }   
         else if(str[i-1] != '0'  &&  str[i] == '0') // can only be considered in duo
         {                   
-            if(str[i-1] <= 2)  // otherwise duo will become greater than 26
+            if(str[i-1] <= '2')  // otherwise duo will become greater than 26
             {
                 if(i-2 >= 0)  // to check for out of bounds
                     dp[i] = dp[i-2];
