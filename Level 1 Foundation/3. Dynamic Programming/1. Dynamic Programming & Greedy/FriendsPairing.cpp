@@ -4,11 +4,14 @@ using namespace std;
 
 int solve(int n)
 {
-    int prev2n = 1;
-    int prevn = 2;
+    //base cases
+    int prev2n = 1; //when i=1
+    int prevn = 2;  // when i=2
     int currn;
 
-    // here fn = curr represents the total count if curr stays single or pairs up
+    // here fn = curr represents the total count if curr 'i' stays single or pairs up
+    // fn-1 = prevn represents the same for i-1
+    // fn-2 = prev2n represents the same for i-2
     // fn = fn-1 * (n-1)*fn-2; 
     int i = 3;
     while(i<=n)
