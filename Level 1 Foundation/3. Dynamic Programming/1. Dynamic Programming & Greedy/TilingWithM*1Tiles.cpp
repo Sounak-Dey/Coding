@@ -14,7 +14,7 @@ int solve(int n, int m)
         for(int i=1; i<m; i++)  //base case
             dp[i] = 1;             // till i<m we can place only vertically
         
-        dp[m] = 2;      //base case, in m*m we have w ways to arrange, all horzontal or all vertical
+        dp[m] = 2;      //base case, in m*m we have 2 ways to arrange, all horizontal or all vertical
 
         for(int i=m+1; i<=n; i++)
         {
