@@ -9,7 +9,6 @@ void solve(vector<int> &prices)
 {
     int n = prices.size();
     int lsf = prices[0];    //least so far
-    int msf = prices[0];    // max so far
     int profit = 0;
 
 // we go from 0 to n maintaining the local minima and maxima
@@ -19,19 +18,13 @@ void solve(vector<int> &prices)
  
     for(int i=1; i<n; i++)
     {
-        if(prices[i]>=msf)      // when prices increase
-            msf = prices[i];
-
-        else if(prices[i]<msf)     // when a dip comes
+        if(prices[i] < prices[i-1])     // when a dip comes
         {
-            profit += msf - lsf;
+            profit += prices[i-1] - lsf;
             lsf = prices[i];
-            msf = prices[i];
         }
-            
-        if(i==n-1)              //collecting the last upstroke if exists
-            profit += msf - lsf;
     }
+    profit += prices[n-1] - lsf;    //collecting the last upstroke if exists
     cout<<profit;
 }
 
