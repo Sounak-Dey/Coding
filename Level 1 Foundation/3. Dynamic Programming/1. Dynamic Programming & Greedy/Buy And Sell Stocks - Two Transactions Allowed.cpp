@@ -15,9 +15,7 @@ void solve(vector<int> &prices)
     int maxProfit = 0;
     //dpl[i] maintains the max profit earned if sold today or earlier
     //dpr[i] maintains the max profit earned if bought today or after
-
-    // we go from 0 to n maintaining least point so far
-    // and calculate the max profit that can be earned today if we sell today or before today
+    
     
     // right to left calculating max profit so far if sold today or before
     for(int i=0; i<n; i++)
