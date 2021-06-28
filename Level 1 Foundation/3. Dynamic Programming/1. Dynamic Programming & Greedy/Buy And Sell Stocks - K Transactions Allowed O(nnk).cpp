@@ -41,5 +41,8 @@ int main()
     int k;
     cin>>k;
 
-    cout<<solve(prices, k);
+    if(prices.size() == 0)
+        cout<<0;
+    else
+        cout<<solve(prices, k);
 }
