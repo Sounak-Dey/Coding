@@ -18,7 +18,7 @@ void solve(vector<int> &prices)
     
     
     // right to left calculating max profit so far if sold today or before
-    for(int i=0; i<n; i++)
+    for(int i=1; i<n; i++)
     {
         if(prices[i]<lsf)
             lsf = prices[i];
@@ -27,7 +27,7 @@ void solve(vector<int> &prices)
     }
 
     //left to right calculating the max profit so far if brought today or after
-    for(int i=n-1; i>=0; i--)
+    for(int i=n-2; i>=0; i--)
     {
         if(prices[i]>msf)
             msf = prices[i];
