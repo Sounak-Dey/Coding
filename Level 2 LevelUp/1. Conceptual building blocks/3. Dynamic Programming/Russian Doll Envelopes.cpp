@@ -20,8 +20,8 @@ int solve(vector<pair<int, int>> &dim)
         maxCount = 0;
         for(int j=0; j<i; j++)
         {
-            if(dim[j].second < dim[i].second)
-                maxCount = max(maxCount, dp[j]);
+            if(dim[j].second < dim[i].second && dim[j].first < dim[i].first) // since envelop has to be stricly smaller
+                maxCount = max(maxCount, dp[j]);                             // and width can be same after sorting
             
         }
         dp[i] = maxCount + 1;
