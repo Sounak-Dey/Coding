@@ -2,10 +2,10 @@
 #include<vector>
 using namespace std;
 
-long long solve(string str)
+int solve(string str)
 {
     int n = str.length();
-    vector<long long> dp(n+1);
+    vector<int> dp(n+1);
     dp[0] = 1;
 
     for(int i=1; i<=n; i++)     // for every charachter in string
@@ -21,18 +21,23 @@ long long solve(string str)
         }
 
         if(prevOccur == -1)
-            dp[i] = 2 * dp[i-1];
+            dp[i] = (2 * dp[i-1]) % 1000000007;
         else
-            dp[i] = 2 * dp[i-1] - dp[prevOccur - 1];
+            dp[i] = ( (2 * dp[i-1]) % 1000000007  - dp[prevOccur - 1]) % 1000000007;
         
     }
-    return dp[n] - 1;
+    if(dp[n]-1 <0)
+        return dp[n] - 1 + 1000000007;
+    else 
+        return dp[n] - 1;
 }
 
-int main()
+
+class Solution 
 {
-    string str;
-    cin>>str;
-    cout<<solve(str);
-    return 0;
-}
+    public:
+        int distinctSubseqII(string s) 
+        {
+            return solve(s);
+        }
+};
