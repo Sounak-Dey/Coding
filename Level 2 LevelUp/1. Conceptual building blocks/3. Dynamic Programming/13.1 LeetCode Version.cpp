@@ -49,31 +49,33 @@ int solve(string str)
 
             else if(str[i] == str[j])
             {
-                if(next[i] > prev[j])       //i.e character doesn't appear in the middle
-                    dp[i][j] = 2*dp[i+1][j-1] +2;
+                if(next[i] > prev[j])      
+                    dp[i][j] = (2*dp[i+1][j-1] + 2) % 1000000007;
 
-                else if(next[i] == prev[j])     //i.e character appears exactly once in the middle
-                    dp[i][j] = 2*dp[i+1][j-1] + 1;
+                else if(next[i] == prev[j])    
+                    dp[i][j] = (2*dp[i+1][j-1] + 1) % 1000000007;
 
-                else if(next[i] < prev[j])      //i.e character appears more than once in the middle
-                    dp[i][j] = 2*dp[i+1][j-1] - dp[next[i]+1][prev[j]-1];
+                else if(next[i] < prev[j])     
+                    dp[i][j] = ((2*dp[i+1][j-1]) % 1000000007 - dp[next[i]+1][prev[j]-1]) % 1000000007;
             }
 
             else if(str[i] != str[j])
             {
-                dp[i][j] = dp[i][j-1] + dp[i+1][j] - dp[i+1][j-1];
+                dp[i][j] = ((dp[i][j-1] + dp[i+1][j]) % 1000000007 - dp[i+1][j-1]) % 1000000007;
             }
         }
     }
 
-    return dp[0][n-1];
+    if(dp[0][n-1] < 0)
+        return dp[0][n-1] + 1000000007;
+    else
+        return dp[0][n-1];
 }
 
 
-int main()
-{
-    string str;
-    cin>>str;
-    cout<<solve(str);
-    return 0;
-}
+class Solution {
+public:
+    int countPalindromicSubsequences(string s) {
+        return solve(s);
+    }
+};
