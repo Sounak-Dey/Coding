@@ -50,7 +50,7 @@ void quickSort(vector<int> &arr, int l, int r)
 
 
     int pivotElement = arr[r];
-    int pivotIndex = partition(arr, pivotElement, l, r);
+    int pivotIndex = partition(arr, pivotElement, l, r);    //pivotElement gets placed in its correct position, pivotIndex
 
     quickSort(arr, l, pivotIndex - 1);
     quickSort(arr, pivotIndex + 1, r);
