@@ -1,7 +1,5 @@
 #include <iostream>
-
 #include <vector>
-
 using namespace std;
 
 void input(vector<int> &arr)
