@@ -19,8 +19,6 @@ void print(vector<int> &arr)
         else
             cout << arr[i] << endl;
     }
-        
-
     cout << endl;
 }
 
@@ -53,8 +51,7 @@ void countSort(vector<int> &arr, int exp, int mod, int range)
     }
     
     for(int i=0; i<ans.size(); i++)
-        arr[i] = ans[i];
-        
+        arr[i] = ans[i];     
 }
 
 
