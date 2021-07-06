@@ -33,7 +33,7 @@ void solve(vector<int> &arr, int k)
         if(j<i)
             j=i;
         
-        while(nger[j] < i+k) // if (nger[j] > i+k), it will mean nger[j] is the biggest element in the curr window
+        while(nger[j] < i+k) // if (nger[j] > i+k), it will mean arr[j] is the biggest element in the curr window
             j = nger[j];
         
         cout<<arr[j]<<endl;
