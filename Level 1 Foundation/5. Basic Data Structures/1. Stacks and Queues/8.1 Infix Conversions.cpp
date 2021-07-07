@@ -16,15 +16,16 @@ int precedence(char op)
 void solve(string str)
 {
     int n = str.length();
-    stack<string> prefix, postfix;
+    stack<string> prefix;
     stack<char> opt;
-
+    string postfix ="";
+    
     for(int i=0; i<n; i++)
     {
-        if((str[i]>='a'  && str[i]<='z')  || (str[i]>='A'  && str[i]<='Z')  ||  (str[i]>='0'  && str[i]<='9'))
+        if(isalpha(str[i]) || isdigit(str[i]))
         {
-            prefix.push(string(1,str[i]));
-            postfix.push(string(1,str[i]));
+            prefix.push(string(1, str[i]));
+            postfix += str[i];
         }
         else if(str[i] == '(')
             opt.push(str[i]);
@@ -40,11 +41,7 @@ void solve(string str)
                 char op = opt.top();
                 prefix.push(op + str1 + str2);
 
-                str2 = postfix.top();
-                postfix.pop();
-                str1 = postfix.top();
-                postfix.pop();
-                postfix.push(str1 + str2 + op);
+                postfix += opt.top();
 
                 opt.pop();
             }
@@ -62,12 +59,7 @@ void solve(string str)
                 char op = opt.top();
                 prefix.push(op + str1 + str2);
 
-                str2 = postfix.top();
-                postfix.pop();
-                str1 = postfix.top();
-                postfix.pop();
-                postfix.push(str1 + str2 + op);
-
+                postfix += opt.top();
 
                 opt.pop();
             }
@@ -85,16 +77,12 @@ void solve(string str)
         char op = opt.top();
         prefix.push(op + str1 + str2);
 
-        str2 = postfix.top();
-        postfix.pop();
-        str1 = postfix.top();
-        postfix.pop();
-        postfix.push(str1 + str2 + op);
+        postfix += opt.top();
 
         opt.pop();
     }
 
-    cout<<postfix.top();
+    cout<<postfix;
     cout<<endl;
     cout<<prefix.top();
 }
