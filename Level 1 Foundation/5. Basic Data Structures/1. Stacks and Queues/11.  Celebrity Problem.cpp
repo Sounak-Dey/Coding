@@ -14,7 +14,7 @@ void solve(vector<string> &rel)
 
     for(int i=0; i<n; i++)
         st.push(i);
-    
+
     while(st.size() > 1)
     {
         int top1 = st.top();
@@ -32,13 +32,13 @@ void solve(vector<string> &rel)
 
     for(int i=0; i<n; i++)
     {
-        if(i != celeb)
+        if(i == celeb)
+            continue;
+            
+        else if(rel[celeb][i] == '1'  ||  rel[i][celeb] == '0')
         {
-            if(rel[celeb][i] == '1'  ||  rel[i][celeb] == '0')
-            {
-                cout<<"none";
-                return;
-            }
+            cout<<"none";
+            return;
         }
     }
 
