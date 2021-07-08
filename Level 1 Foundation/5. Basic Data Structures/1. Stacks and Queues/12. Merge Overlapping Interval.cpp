@@ -19,13 +19,7 @@ void solve(vector<pair<int, int>> &intervals)
     {
         if(st.top().second >= intervals[i].first)   //if ith interval operlaps with interval at stack top 
         {
-            if(st.top().second < intervals[i].second) // if ith interval has larger ending time
-            {
-                int start = st.top().first;         // merge these two intervals
-                int end = intervals[i].second;
-                st.pop();
-                st.push({start, end});  // make pair and push
-            }
+            st.top().second = max(st.top().second, intervals[i].second); // merging by pushing the larger end time
         }
         else            // if ith interval doesn't overlap .. push it as a new interval
         {
