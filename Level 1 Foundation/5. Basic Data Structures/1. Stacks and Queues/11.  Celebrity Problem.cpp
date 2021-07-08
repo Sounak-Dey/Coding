@@ -22,9 +22,9 @@ void solve(vector<string> &rel)
         int top2 = st.top();
         st.pop();
 
-        if(rel[top2][top1] == '1')  //if top1 knows top2, top1 can't be a celebrity
+        if(rel[top2][top1] == '1')  //if top2 knows top1, top2 can't be a celebrity
             st.push(top1);
-        else                        // if top1 doesn't know top2, top2 can't be a celebrity
+        else                        // if top2 doesn't know top1, top1 can't be a celebrity
             st.push(top2);
     }
 
@@ -34,7 +34,7 @@ void solve(vector<string> &rel)
     {
         if(i != celeb)
         {
-            if(rel[celeb][i] == 1  ||  rel[i][celeb] == 1)
+            if(rel[celeb][i] == '1'  ||  rel[i][celeb] == '0')
             {
                 cout<<"none";
                 return;
@@ -53,7 +53,8 @@ int main()
 
     vector<string> rel(n);
     for(auto &x: rel)
-        getline(cin, x);
+        cin>>x;
+        // getline(cin, x); // this is wrong, use only cin else getline will store blank in rel[0]
     
     solve(rel);
     return 0;
