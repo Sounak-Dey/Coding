@@ -18,7 +18,7 @@ class Person
 
 int main()
 {
-    Person p1, p2;
+    Person p1, p2; // everytime a new instance is created
 
     p1.age = 10;
     p1.name = "p1";
@@ -38,7 +38,7 @@ int main()
     p1.saysHi();
     p4->saysHi();
 
-    Person *p5 = new Person();
+    Person *p5 = new Person();  // everytime new reference is created
     p5->name = "p5";
     p5->age = 50;
     p5->saysHi();
@@ -51,5 +51,3 @@ int main()
     delete p5;
 
 }
-
-
