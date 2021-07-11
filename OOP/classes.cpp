@@ -6,13 +6,13 @@ class Person
 {
     public:
 
-    int age;
-    string name;
+        int age;
+        string name;
 
-    void saysHi()
-    {
-        cout<<name<<"["<<age<<"] says hi"<<endl;
-    }
+        void saysHi()
+        {
+            cout<<name<<"["<<age<<"] says hi"<<endl;
+        }
 
 };
 
