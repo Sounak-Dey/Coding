@@ -16,7 +16,7 @@ class LinkedList
         node *head, *tail;
         int size;
         
-        LinkedList()        // this constructor definition is compulsory, else I get segmentation fault
+        LinkedList()       
         {
             head = NULL;
             tail = NULL;
@@ -38,23 +38,26 @@ class LinkedList
             tail = temp;
             size++;
         }
+
+        int showSize()
+        {
+            return size;
+        }
+
+        void display()
+        {
+            node *temp;
+            temp = head;
+
+            while(temp!= NULL)
+            {
+                cout<<temp->data<<" ";
+                temp = temp->next;
+            }
+            cout<<endl;
+        }
 };
 
-void testList(LinkedList list)
-{
-    node *temp;
-    temp = list.head;
-
-    while(temp != NULL)
-    {
-        cout<<temp->data<<endl;
-        temp = temp->next;
-    }
-    cout<<list.size<<endl;
-
-    if(list.size > 0)
-        cout<<list.tail->data;
-}
 
 
 int main()
@@ -71,11 +74,15 @@ int main()
             int val = stoi(str.substr(str.find(" ") + 1));
             list.addLast(val);
         }
+        else if(str.find("size") == 0)
+            cout<<list.showSize()<<endl;
+
+        else if(str.find("display") == 0)
+            list.display();
+
 
         getline(cin, str);
     }
-
-    testList(list);
 
     return 0;
 }
