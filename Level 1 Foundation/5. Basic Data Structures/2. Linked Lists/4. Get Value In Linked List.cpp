@@ -46,18 +46,18 @@ class LinkedList
                 tail->data;
         }
         
-        int getAt(int idx)
+       int getAt(int idx)
         {
-            if(head == NULL)
-            {
-                cout<<"List is empty"<<endl;
-                return -1;
-            }
-            else if(idx >= size)
+            if(idx < 0 || idx >= size)
             {
                 cout<<"Invalid arguments"<<endl;
                 return -1;
             }
+            // else if(head == NULL)        // not needed as, when head = NULL, size = 0, so if idx >=0 then it will return invalid arguments
+            // {
+            //     cout<<"List is empty"<<endl;
+            //     return -1;
+            // }
             else
             {
                 node *temp = head;

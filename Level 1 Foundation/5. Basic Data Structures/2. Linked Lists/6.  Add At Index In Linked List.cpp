@@ -1,5 +1,6 @@
 #include<iostream>
 #include<vector>
+#include<string>
 
 using namespace std;
 
@@ -137,6 +138,37 @@ class LinkedList
             head = temp;
             size++;
         }
+
+        void addAt(int idx, int val)
+        {
+            node *temp = new node();
+            temp->data = val;
+
+            if(idx < 0 || idx > size)
+                cout<<"Invalid arguments"<<endl;
+                
+            else if(idx == 0)
+                addFirst(val);
+                
+            else if(idx == size)
+                addLast(val);
+            
+            else
+            {
+                node *i = head;
+                while(idx>1)
+                {
+                    i = i->next;
+                    idx--;
+                }
+
+                temp->next = i->next;
+                i->next = temp;
+                
+                size++;
+            }
+        }
+
 };
 
 
@@ -188,7 +220,12 @@ int main()
             int val = stoi(str.substr(str.find(" ") + 1));
             list.addFirst(val);
         }
-
+        else if(str.find("addAt") == 0)
+        {
+            int idx = stoi(str.substr(str.find(" ") + 1));
+            int val = stoi(str.substr(str.rfind(" ") + 1));
+            list.addAt(idx, val);
+        }
 
         getline(cin, str);
     }
