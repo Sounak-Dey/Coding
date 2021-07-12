@@ -168,6 +168,31 @@ class LinkedList
                 size++;
             }
         }
+
+        void removeLast()
+        {
+            if(head == NULL)
+                cout<<"List is empty"<<endl;
+            
+            else if(head == tail)
+            {
+                head = NULL;
+                tail = NULL;
+                size--;
+            }
+            else
+            {
+                node *temp = head;
+
+                while(temp->next != tail)
+                    temp = temp->next;
+                
+                temp->next = NULL;
+                tail = temp;
+                size--;
+            }
+        }
+
 };
 
 
@@ -225,6 +250,8 @@ int main()
             int val = stoi(str.substr(str.rfind(" ") + 1));
             list.addAt(idx, val);
         }
+        else if(str.find("removeLast") == 0)
+            list.removeLast();
 
         getline(cin, str);
     }
