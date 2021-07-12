@@ -9,14 +9,14 @@ class twoStack
 
     public:
 
-        int *data = new int(5);
+        vector<int> data;
         int tos1;
         int tos2;
         int max;
 
         twoStack(int cap)
         {
-            // data = new int(5);
+            data.reserve(cap);
             tos1 = -1;
             tos2 = cap;
             max = cap;
@@ -107,6 +107,7 @@ class twoStack
 int main()
 {
     int n;
+    cin>>n;
     twoStack st(n);
     string str;
     getline(cin, str);
