@@ -392,13 +392,11 @@ class LinkedList
         void removeDuplicates()
         {
             node *temp = head;
-
+            
             while(temp != tail)
             {
                 if(temp->data == temp->next->data)
-                {
-                    removeNext(temp);
-                }
+                    removeNext(temp);                   
                 else 
                     temp = temp->next;
             }
