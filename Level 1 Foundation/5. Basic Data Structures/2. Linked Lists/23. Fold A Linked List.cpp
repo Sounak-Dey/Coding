@@ -89,6 +89,32 @@ class LinkedList
                 return false;
         }
 
+        node *fleft;
+        // int floor; // sir's method is better i.e to pass floor as parameter and increase at every racursive call
+        void foldHelper(node *right, int floor)
+        {
+            if(right == NULL)
+                return;
+
+            foldHelper(right->next, floor + 1);
+            
+            if(floor > showSize()/2)
+            {
+                node *temp = fleft->next;
+                fleft->next = right;
+                right->next = temp;
+                fleft = temp;
+                // floor--;
+            }
+            else if(floor == showSize()/2)
+            {
+                right->next = NULL;
+                tail = right;
+                // floor--;
+            }
+            else 
+                return;
+        }
 
     public:
 
@@ -533,6 +559,13 @@ class LinkedList
             pleft = head;
             return isPalindromeHelper(head);
         }
+
+        void fold()
+        {
+            fleft = head;
+            // floor = showSize() - 1;
+            foldHelper(head, 0);
+        }
 };
 
 
@@ -549,10 +582,14 @@ int main()
         l1.addLast(x);
     }
 
-    if(l1.isPalindrome())
-        cout<<"true";
-    else
-        cout<<"false";
+    int a, b;
+    cin>>a>>b;
 
+    l1.display();
+    l1.fold();
+    l1.display();
+    l1.addFirst(a);
+    l1.addLast(b);
+    l1.display();
     return 0;
 }

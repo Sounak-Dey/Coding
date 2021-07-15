@@ -461,9 +461,9 @@ class LinkedList
                     }
                 }
                 
-                if(prev.showSize() == 0)
+                if(prev.showSize() == 0)    // adding first batch of k elements
                     prev = curr;
-                else
+                else    //from next batch onwards
                 {
                     prev.tail->next = curr.head;
                     prev.tail = curr.tail;
