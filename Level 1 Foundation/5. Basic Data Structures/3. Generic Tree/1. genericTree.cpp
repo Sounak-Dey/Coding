@@ -34,7 +34,7 @@ void display(node *nd)
 node *construct(vector<int> arr)
 {
     node *root = nullptr;
-    stack<node *> st;
+    stack<node *> st;       // we will use the stack to implement the tree hierarchy, whenever a node arrives, its parent will be at the stack top() already
 
     for(int i=0; i<arr.size(); i++)
     {
