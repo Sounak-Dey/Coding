@@ -106,7 +106,7 @@ int lcaf(node *nd, int d1, int d2)
     int i = path1.size()-1;
     int j = path2.size()-1;
 
-    while(i>=0 && j>=0  &&  path1[i] == path2[j]) // runs till we get a different element in the two paths
+    while(i>=0 && j>=0  &&  path1[i] == path2[j]) 
     {
         i--;
         j--;
@@ -115,7 +115,26 @@ int lcaf(node *nd, int d1, int d2)
     return path1[i+1];
 }
 
+int distance(node *nd, int d1, int d2)
+{
+    vector<int> path1 = nodeToRootPath(nd, d1);
+    vector<int> path2 = nodeToRootPath(nd, d2);
 
+    int i = path1.size()-1;
+    int j = path2.size()-1;
+
+    while(i>=0 && j>=0  &&  path1[i] == path2[j]) 
+    {
+        i--;        
+        j--;
+    }
+
+    i++;    // i++, j++ now denote the distance the common ancestor is at from d1 & d2
+    j++;
+
+    return i+j;
+    
+}
 
 int main()
 {
@@ -129,8 +148,8 @@ int main()
     cin>>d1>>d2;
 
     node *root = construct(arr);
-    int lca = lcaf(root, d1, d2);
-    cout<<lca<<endl;
+    int dist = distance(root, d1, d2);
+    cout<<dist<<endl;
 
     return 0;
 }
