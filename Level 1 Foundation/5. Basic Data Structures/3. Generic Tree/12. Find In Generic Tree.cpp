@@ -60,28 +60,19 @@ node *construct(vector<int> arr)
     return root;
 }
 
-node *getTail(node *nd)
+bool findv(node *nd, int data)
 {
-    while(!nd->children.empty())
-        nd = nd->children[0];
-    
-    return nd;
-}
+    if(nd->data == data)
+        return true;
 
-void linearize(node *nd)
-{
-    for(auto child: nd->children)   // linearize indivisual child using recursion
-        linearize(child);
-    
-    while(nd->children.size() > 1)
+    for(auto child: nd->children)
     {
-        node *lastChild = nd->children[nd->children.size()-1];    // get the last child of 'nd'
-        nd->children.erase(nd->children.begin() + nd->children.size()-1); // remove the last child
-
-        node *secondLast = nd->children[nd->children.size()-1]; // second last child is nor last child
-        node *secondLastsTail = getTail(secondLast);    
-        secondLastsTail->children.push_back(lastChild); // add last child as a child to the tail of the second last child
-    }
+        bool flag = findv(child, data); 
+        if(flag == true)    // if any one child returns true, stop execution and return true
+            return true;
+    }    
+    
+    return false;
 }
 
 
@@ -92,10 +83,15 @@ int main()
     vector<int> arr(n);
     for(auto &i: arr)
         cin>>i;
-    
+    int data;
+    cin>>data;
+
     node *root = construct(arr);
-    linearize(root);
-    display(root);
+    bool flag = findv(root, data);
+    if(flag == true)
+        cout<<"true";
+    else
+        cout<< "false";
 
     return 0;
 }
