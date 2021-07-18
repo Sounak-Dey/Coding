@@ -91,8 +91,11 @@ vector<int> pre, post;
 void iterativePrePost(node *root)
 {
     stack<pair<node*, int>> st;
-    st.push({root, -1});
-
+    st.push({root, -1}); // st.top.second represents the state in which the st.top.first is in
+                        // state == -1; first time visit, preoorder visit
+                        //state == 0 to st.top().first->children.size()-1; visting childrens, 
+                        //state == st.top().first->children.size(); completeted visiting all children, postorder visit
+                        
     while(!st.empty())
     {
         if(st.top().second == -1) //preorder visit
