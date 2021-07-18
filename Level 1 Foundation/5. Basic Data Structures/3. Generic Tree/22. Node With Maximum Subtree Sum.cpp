@@ -77,8 +77,8 @@ int sum(node *nd)
         maxSumNode = nd->data;
     }
 
-    return sumn;
-}
+    return sumn;    // we don't return the maxsum of a subtree with nd as root because it won't allow us to calculate the actual sum of the subtree, it will be = maxsubtree sum + node value
+}                   // and not sum of subtree + node value, which is what we actually need to calculate the maxSum.
 
 int main()
 {
