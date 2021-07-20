@@ -90,7 +90,7 @@ node *construct(vector<int> &arr)
 int size(node *nd)
 {
     if(nd == nullptr)
-        return 0;
+        return 0; // identity
 
     return size(nd->left) + size(nd->right) + 1;
 }
@@ -98,7 +98,7 @@ int size(node *nd)
 int sum(node *nd)
 {
     if(nd == nullptr)
-        return 0;
+        return 0; // identity
 
     return sum(nd->left) + sum(nd->right) + nd->data;
 }
@@ -106,7 +106,7 @@ int sum(node *nd)
 int maxv(node *nd)
 {
     if(nd == nullptr)
-        return 0;
+        return INT32_MIN; // identity
 
     return  max({maxv(nd->left), maxv(nd->right), nd->data});
 }
@@ -114,7 +114,7 @@ int maxv(node *nd)
 int height(node *nd)
 {
     if(nd == nullptr)
-        return 0;
+        return -1; // identity
 
     int h = max(height(nd->left), height(nd->right));
 
@@ -125,6 +125,7 @@ int height(node *nd)
 int main()
 {
     int n;
+    cin>>n;
     vector<int> arr(n);
     string c;
     for(auto &x: arr)
