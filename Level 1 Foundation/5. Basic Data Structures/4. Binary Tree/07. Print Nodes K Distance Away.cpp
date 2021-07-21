@@ -99,10 +99,33 @@ void display(vector<int>& arr)
     cout << "]"<<endl;
 }
 
-
-void printKLevelsDown(node *nd, int k)
+vector<node *> nodeToRootPath(node *nd, int data)
 {
-    if(nd == nullptr || k < 0)
+    vector<node *> path;
+
+    if(nd == nullptr)
+        return path;
+
+    if(nd->data == data)
+        path.push_back(nd);
+
+    else if(nodeToRootPath(nd->left, data).size() > 0 ) // if data found in left subtree so it returns a filled vector
+    {
+        path = nodeToRootPath(nd->left, data);
+        path.push_back(nd);
+    }
+    else if(nodeToRootPath(nd->right, data).size() > 0 ) // if data found in right subtree
+    {
+        path = nodeToRootPath(nd->right, data);
+        path.push_back(nd);
+    }
+
+    return path;
+}
+
+void printKLevelsDown(node *nd, int k, node *blocker)
+{
+    if(nd == nullptr || k < 0  ||  nd == blocker)
         return;
 
     if(k==0)
@@ -111,8 +134,18 @@ void printKLevelsDown(node *nd, int k)
         return;
     }
 
-    printKLevelsDown(nd->left, k-1);
-    printKLevelsDown(nd->right, k-1);
+    printKLevelsDown(nd->left, k-1, blocker);
+    printKLevelsDown(nd->right, k-1, blocker);
+}
+
+void printKNodesFar(node *nd, int data, int k)
+{
+    vector<node*> path = nodeToRootPath(nd, data);
+
+    printKLevelsDown(path[0], k, nullptr);
+
+    for(int i=1; i<path.size(); i++)
+        printKLevelsDown(path[i], k-i, path[i-1]);
 
 }
 
@@ -131,11 +164,11 @@ int main()
             x = NULL;
     }
 
-    int k;
-    cin>>k;
+    int data, k;
+    cin>>data>>k;
 
     node *root = construct(arr);
-    printKLevelsDown(root, k);
+    printKNodesFar(root, data, k);
     
     return 0;
 }
