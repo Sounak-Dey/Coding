@@ -95,7 +95,7 @@ bool find(node *nd, int data)
     if(nd->data == data)
         return true;
     
-    if(find(nd->left, data)  ||  find(nd->right, data))
+    if(find(nd->left, data)  ||  find(nd->right, data)) // if data is found in either left or right subtree
         return true;
     
     return false;
@@ -111,12 +111,12 @@ vector<int> nodeToRootPath(node *nd, int data)
     if(nd->data == data)
         path.push_back(nd->data);
 
-    else if(nodeToRootPath(nd->left, data).size() > 0 ) 
+    else if(nodeToRootPath(nd->left, data).size() > 0 ) // if data found in left subtree so it returns a filled vector
     {
         path = nodeToRootPath(nd->left, data);
         path.push_back(nd->data);
     }
-    else if(nodeToRootPath(nd->right, data).size() > 0 ) 
+    else if(nodeToRootPath(nd->right, data).size() > 0 ) // if data found in right subtree
     {
         path = nodeToRootPath(nd->right, data);
         path.push_back(nd->data);
