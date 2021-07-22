@@ -99,20 +99,37 @@ void display(vector<int>& arr)
     cout << "]"<<endl;
 }
 
-int tsum;
-int tilt(node *nd)
+struct triad
 {
-    if(nd == nullptr)
-        return 0;
+    bool BST;
+    int nmin;
+    int nmax;
+};
 
-    int l = tilt(nd->left); // returns sum of left subtree
-    int r = tilt(nd->right); // returns sum of right subtree
+triad *isaBST(node *nd)
+{
+    triad *ret = new triad();
 
-    int currTilt = abs(l-r); //calculate current node's tilt
-    tsum += currTilt;
+    if(nd == nullptr) // base case
+    {
+        ret->BST = true;
+        ret->nmin = INT32_MAX; // identity of min
+        ret->nmax = INT32_MIN; // identity of max
+        return ret;
+    }
 
-    int sum = l + r + nd->data;
-    return sum; // return sum of tree with curr node as root
+    triad *l = isaBST(nd->left);
+    triad *r = isaBST(nd->right);
+
+    if(l->nmax < nd->data  &&  nd->data < r->nmin  && l->BST == true  &&  r->BST == true) // global BST cannot be used, as nd->left's result gets overwritten by nd->right
+        ret->BST = true;
+    else
+        ret->BST = false;
+    
+    ret->nmin = min(l->nmin, nd->data); // basically a hacky to handle leaf nodes, when nd->data needs to be returned
+    ret->nmax = max(r->nmax, nd->data); // else generally l.first and r.second represent the min and max values in a subtree
+
+    return ret;
 }
 
 int main()
@@ -131,9 +148,13 @@ int main()
     }
 
     node *root = construct(arr);
-    tsum = 0;
-    tilt(root);
-    cout<<tsum<<endl;
+
+    triad *t = isaBST(root);
+
+    if(t->BST == true)
+        cout<<"true";
+    else
+        cout<<"false";
     
     return 0;
 }
