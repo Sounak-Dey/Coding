@@ -97,6 +97,9 @@ int maxv(node *nd)
 
 node *remove(node *nd, int data)
 {
+    if(nd == nullptr) // of node to remove not found
+        return nullptr;
+
     if(nd->data == data)
     {
         if(nd->left == nullptr  &&  nd->right == nullptr) // if the node is a leaf node
