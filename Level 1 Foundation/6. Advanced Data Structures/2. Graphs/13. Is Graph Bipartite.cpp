@@ -14,7 +14,6 @@ struct Edge
 };
 
 
-// using BFS
 int main()
 {
     int vtces;
@@ -33,42 +32,42 @@ int main()
         graph[v2].push_back(new Edge(v2, v1, wt));
     }
 
-    queue<int> q;
-    vector<bool> visited(vtces);
-    bool flag = false;
+
+    vector<bool>visited(vtces);
+    queue<pair<int, int>> q; // first -> vertex, second-> length of path till vertex
+    bool flag = true;
 
     for(int v=0; v<vtces; v++)
     {
         if(visited[v] == false)
         {
-            q.push(v);
+            q.push({v, 1});
 
             while(!q.empty())
             {
-                if(visited[q.front()] == false)
-                {
-                    visited[q.front()] = true;
+                int vtx = q.front().first;
+                int length = q.front().second;
 
-                    for(auto edge: graph[q.front()])
+                if(visited[vtx] == false)
+                {
+                    visited[vtx] = true;
+                    for(auto edge: graph[vtx])
                     {
                         if(visited[edge->nbr] == false)
-                            q.push(edge->nbr);
-                            
-                        // else if(visited[edge->nbr] == true) // won't work as there will always be one previous visied nbr
-                        //     flag = true;                     // as a result the code will always reurn true
+                            q.push({edge->nbr, length+1});
                     }
                 }
-                else // so cycle is detected when a vertex is visited but is also present in queue
-                {     // as a nbr of another vertex
-                    flag = true;
+                else // cycle detected
+                {
+                    if(length % 2 == 1) // cannot be bipartite if cycle exists and is of odd length
+                        flag = false;
                 }
 
                 q.pop();
             }
-
         }
     }
-    
+
     if(flag == true)
         cout<<"true";
     else
