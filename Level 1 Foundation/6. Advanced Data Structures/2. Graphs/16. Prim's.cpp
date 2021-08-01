@@ -16,17 +16,19 @@ struct Edge
 struct triad
 {
     int vtx;
-    string psf;
-    int wsf;
+    int prevtx;
+    int wt;
 };
 
 bool operator < (triad const &t1, const triad &t2)
 {
-    if(t1.wsf == t2.wsf)
-        return t1.psf.length() < t2.psf.length();
+    if(t1.wt == t2.wt)
+        return t1.prevtx < t2.prevtx;
         
-    return t1.wsf > t2.wsf;
+    return t1.wt > t2.wt;
 }
+
+
 
 int main()
 {
@@ -46,29 +48,28 @@ int main()
         graph[v2].push_back(new Edge(v2, v1, wt));
     }
 
-    int src;
-    cin>>src;
 
     vector<bool> visited(vtces);
     priority_queue<triad> pq;
 
-    pq.push({src, to_string(src), 0}); // node, weight so far
+    pq.push({0, -1, 0}); // node, previou vertex, weight of this edge
 
     while(!pq.empty())
     {
         int vtx = pq.top().vtx;
-        string psf = pq.top().psf;
-        int wsf = pq.top().wsf;
-        pq.pop();
+        int prevtx = pq.top().prevtx;
+        int edgewt = pq.top().wt;
+        pq.pop();// since priority queue is used ...poping must be done earlier else a minimum priority element can take over the top;
 
         if(visited[vtx] == false)
         {
             visited[vtx] = true;
-            cout<<vtx<<" via "<<psf<<" @ "<<wsf<<endl;
+            if(prevtx != -1)
+                cout<<"["<<vtx<<"-"<<prevtx<<"@"<<edgewt<<"]"<<endl;
 
             for(auto edge: graph[vtx])
                 if(visited[edge->nbr] == false)
-                    pq.push({edge->nbr, psf + to_string(edge->nbr), wsf + edge->wt});
+                    pq.push({edge->nbr, vtx, edge->wt});
         }
     }
 }
