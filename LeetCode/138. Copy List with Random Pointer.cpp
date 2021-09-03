@@ -44,3 +44,42 @@ public:
 };
 
 //optimal
+class Solution {
+public:
+    Node* copyRandomList(Node* head) {
+        
+        if(head == NULL)
+            return NULL;
+        
+        // insert a new copy after the current node
+        for(auto i=head; i!=NULL; i=i->next->next)
+        {
+            Node *l2 = new Node(i->val);
+            l2->next = i->next;
+            i->next = l2;
+        }
+        
+        Node *copyHead = head->next;
+        
+
+        // point the random pointers
+        for(auto i=head; i!=NULL; i=i->next->next)
+        {
+            if(i->random != NULL)
+                i->next->random = i->random->next;
+        }
+        
+        
+        //recover the original list and correctly point the copy and original lists nex pointers
+        for(auto i=head; i!= NULL; i=i->next)
+        {
+            auto l2 = i->next;
+            i->next = l2->next;
+            
+            if(l2->next != NULL)
+                l2->next = i->next->next;    
+        }
+        
+        return copyHead;
+    }
+};
